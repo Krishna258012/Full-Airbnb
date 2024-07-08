@@ -1,0 +1,32 @@
+/* .container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.header{
+    background-color: red;
+    color: white;
+    height: 5vw;
+} */
+.header-three-data {
+    display: flex;
+    width: 80%;
+    align-items: center;
+    justify-content: center;
+}
+
+/* .header-text{
+    text-align: justify;
+} */
+
+.svg {
+    display: block;
+    fill: none;
+    height: 16px;
+    width: 16px;
+    stroke: currentColor;
+    stroke-width: 4;
+    overflow: visible;
+    /* background-color: #ff385d; */
+}
