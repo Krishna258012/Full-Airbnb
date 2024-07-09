@@ -1,31 +1,33 @@
 import React, { useEffect, useState } from "react";
 import "../assets/css/header.css";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 const Header = () => {
-  const [showhead , setShowhead] = useState(false)
-  const handleSearch = ()=>{
-    if(showhead){
-      setShowhead(false)
-    }else{
-      setShowhead(true)
+  const [showhead, setShowhead] = useState(true);
+  const handleSearch = () => {
+    if (showhead) {
+      setShowhead(false);
+    } else {
+      setShowhead(true);
     }
-  }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
-      if (showhead) {
-        setShowhead(false)
+      if (window.scrollY > 0) {
+        setShowhead(false);
+      } else {
+        setShowhead(true);
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [showhead]);
-  
+
   return (
     <div className="header-all">
       <header className="header-header">
@@ -49,42 +51,67 @@ const Header = () => {
         </div>
 
         {/* All Three Data */}
-        <button onClick={handleSearch} style={{ backgroundColor: "#fff", border: "none" }} className="header-three-data ">
-          <div className="border border-2 d-flex gap-3 p-1 rounded-pill  align-items-center">
-            <div className="fw-semibold ms-2 ">Anywhere</div>
-            <div className="home-border border-end border-2"></div>
-            <div className="fw-semibold">Any week</div>
-            <div className="home-border border-end border-2"></div>
-            <div className="">Any guests</div>
-            <div
-              style={{ backgroundColor: "#ff385d", border: "none" }}
-              className="d-flex align-self-center p-2 rounded-circle"
-            >
-              <svg
-                xmlnsXlink="http://www.w3.org/1999/xlink"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 32 32"
-                className="svg"
-                aria-hidden="true"
-                role="presentation"
-                focusable="false"
-                width="32"
-                height="32"
-              >
-                <path
-                  fill="none"
-                  d="M13 24a11 11 0 1 0 0-22 11 11 0 0 0 0 22zm8-3 9 9"
-                  stroke="#FFFFFF"
-                  strokeWidth="4px"
-                ></path>
-              </svg>
+        {showhead ? (
+          <button
+            onClick={handleSearch}
+            style={{ backgroundColor: "#fff", border: "none" }}
+            className="header-three-data fade-in"
+          >
+            <div className="head-All-All">
+              <div className="border border-2 d-flex gap-3 p-1 rounded-pill  align-items-center">
+                <div>Stays</div>
+                <div>Experience</div>
+              </div>
+              <div className="border border-2 d-flex gap-3 p-1 mt-5 rounded-pill  align-items-center">
+                <div>where</div>
+                <div>Cdheck</div>
+                <div>Out</div>
+                <div>WHo</div>
+              </div>
             </div>
-          </div>
-        </button>
-
+          </button>
+        ) : (
+          <button
+            onClick={handleSearch}
+            style={{ backgroundColor: "#fff", border: "none" }}
+            className="header-three-data slide-in"
+          >
+            <div className="border border-2 d-flex gap-3 p-1 rounded-pill  align-items-center">
+              <div className="fw-semibold ms-2 ">Anywhere</div>
+              <div className="home-border border-end border-2"></div>
+              <div className="fw-semibold">Any week</div>
+              <div className="home-border border-end border-2"></div>
+              <div className="">Any guests</div>
+              <div
+                style={{ backgroundColor: "#ff385d", border: "none" }}
+                className="d-flex align-self-center p-2 rounded-pill"
+              >
+                <svg
+                  xmlnsXlink="http://www.w3.org/1999/xlink"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 32 32"
+                  className="svg"
+                  aria-hidden="true"
+                  role="presentation"
+                  focusable="false"
+                  width="32"
+                  height="32"
+                >
+                  <path
+                    fill="none"
+                    d="M13 24a11 11 0 1 0 0-22 11 11 0 0 0 0 22zm8-3 9 9"
+                    stroke="#FFFFFF"
+                    strokeWidth="4px"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+          </button>
+        )}
 
         {/* now account and  */}
-        <button className="border border-2 d-flex gap-2 ps-3 p-1 rounded-pill align-items-center bg-body">
+        <div className="header-border-all">
+        <button  className="header-border border border-2 gap-1 ps-2 p-1 align-items-center bg-body">
           <svg
             xmlnsXlink="http://www.w3.org/1999/xlink"
             xmlns="http://www.w3.org/2000/svg"
@@ -122,6 +149,7 @@ const Header = () => {
             ></path>
           </svg>
         </button>
+        </div>
         {/* <ul>
             <li>
               <a href="/Signup">Signup</a>
@@ -131,7 +159,7 @@ const Header = () => {
             </li>
           </ul> */}
       </header>
-      {showhead && (
+      {/* {showhead && (
         <div className="header-main">
         <div className="header-content">
           <h2>hi</h2>
@@ -139,7 +167,7 @@ const Header = () => {
           <h1>hello</h1>
         </div>
       </div>
-      )}
+      )} */}
     </div>
   );
 };

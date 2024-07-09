@@ -5,7 +5,7 @@ const getListings = async (req, res) => {
   // const address = req.query.address;
   // const country = req.query.country;
   const {street, country , price, name} = req.query;
-  console.log("Parsed Price:", price);
+  // console.log("Parsed Price:", price);
 
   let queryObjFilter = {};
   if (street) {
