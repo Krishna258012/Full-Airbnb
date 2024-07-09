@@ -1,11 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../assets/css/header.css";
 import { Link } from "react-router-dom"
 
 const Header = () => {
+  const [showhead , setShowhead] = useState(false)
+  const handleSearch = ()=>{
+    if(showhead){
+      setShowhead(false)
+    }else{
+      setShowhead(true)
+    }
+  }
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (showhead) {
+        setShowhead(false)
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [showhead]);
+  
   return (
-    <div className="">
-      <header className="d-flex flex-row p-3 ms-4 mt-2">
+    <div className="header-all">
+      <header className="header-header">
         <div className="align-self-center">
           <svg
             xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -24,14 +47,16 @@ const Header = () => {
             ></path>
           </svg>
         </div>
-        <div className="header-three-data ">
+
+        {/* All Three Data */}
+        <button onClick={handleSearch} style={{ backgroundColor: "#fff", border: "none" }} className="header-three-data ">
           <div className="border border-2 d-flex gap-3 p-1 rounded-pill  align-items-center">
             <div className="fw-semibold ms-2 ">Anywhere</div>
             <div className="home-border border-end border-2"></div>
             <div className="fw-semibold">Any week</div>
             <div className="home-border border-end border-2"></div>
             <div className="">Any guests</div>
-            <button
+            <div
               style={{ backgroundColor: "#ff385d", border: "none" }}
               className="d-flex align-self-center p-2 rounded-circle"
             >
@@ -53,9 +78,12 @@ const Header = () => {
                   strokeWidth="4px"
                 ></path>
               </svg>
-            </button>
+            </div>
           </div>
-        </div>
+        </button>
+
+
+        {/* now account and  */}
         <button className="border border-2 d-flex gap-2 ps-3 p-1 rounded-pill align-items-center bg-body">
           <svg
             xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -103,6 +131,15 @@ const Header = () => {
             </li>
           </ul> */}
       </header>
+      {showhead && (
+        <div className="header-main">
+        <div className="header-content">
+          <h2>hi</h2>
+          <h3>hiii</h3>
+          <h1>hello</h1>
+        </div>
+      </div>
+      )}
     </div>
   );
 };

@@ -30,3 +30,41 @@
     overflow: visible;
     /* background-color: #ff385d; */
 }
+
+
+  .header-header{
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    display: flex;
+    padding: 1rem;
+    margin: 0 0 0px 0;
+    z-index: 1000;
+    background-color: #fff;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
+  }
+
+
+  .header-main{
+    position: relative;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 20px;
+    margin: 50px 0 -60px 0px;
+    z-index: 999;
+    display: block;
+}
+
+.header-content {
+    background-color: #fefefe;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    /* margin: 15% auto;
+    padding: 20px; */
+    /* border: 1px solid #888; */
+    /* width: 80%; */
+  }
