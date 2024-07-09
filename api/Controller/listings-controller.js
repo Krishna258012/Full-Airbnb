@@ -24,14 +24,14 @@ const getListings = async (req, res) => {
   if(name){
     queryObjFilter.name = {$regex: name , $options: "i"};
   }
-  console.log("Query Object Filter: ", queryObjFilter);
+  // console.log("Query Object Filter: ", queryObjFilter);
   try {
     const data = await listing.find(queryObjFilter).limit(15);
     return res
       .status(200)
       .send({ message: "Data Fetched Successfully", data: data });
   } catch (err) {
-    console.error("Error Retrieving Data: ", err.message);
+    // console.error("Error Retrieving Data: ", err.message);
   } finally {
     // Close the Mongoose connection after fetching data
     // mongoose.connection.close();
