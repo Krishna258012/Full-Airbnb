@@ -1,25 +1,15 @@
-/* .container{
-    display: flex;
-    flex-direction: column;
+.header-all {
     width: 100%;
+    height: 100%;
 }
 
-.header{
-    background-color: red;
-    color: white;
-    height: 5vw;
-} */
 .header-three-data {
     display: flex;
-    width: 80%;
+    height: 100%;
     align-items: center;
     justify-content: center;
 }
 
-
-/* .header-text{
-    text-align: justify;
-} */
 
 .svg {
     display: block;
@@ -29,7 +19,6 @@
     stroke: currentColor;
     stroke-width: 4;
     overflow: visible;
-    /* background-color: #ff385d; */
 }
 
 
@@ -37,44 +26,13 @@
     position: fixed;
     top: 0px;
     width: 100%;
-    max-height: 150px;
+    min-height: 122px;
     display: flex;
-    padding: 1rem;
-    margin: 0 0 0px 0;
-    z-index: 1000;
+    justify-content: space-evenly;
+    align-items: center;
+    z-index: 556;
     background-color: #fff;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
-}
-
-
-.header-main {
-    position: relative;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    padding: 20px;
-    margin: 50px 0 -60px 0px;
-    z-index: 999;
-    display: block;
-}
-
-.header-content {
-    background-color: #fefefe;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    /* margin: 15% auto;
-    padding: 20px; */
-    /* border: 1px solid #888; */
-    /* width: 80%; */
-}
-
-.head-All-All {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .header-border {
@@ -83,40 +41,137 @@
     display: flex;
 }
 
-.header-border-all {
-    display: flex;
-    align-items: center;
-}
-
-
 .fade-in {
-    animation: fadeIn 0.2s ease-in;
+    animation: fadeIn 0.3s ease-in;
 }
 
 .slide-in {
-    animation: slideIn 0.2s ease-out;
+    animation: slideIn 0.3s ease-out;
 }
 
 @keyframes fadeIn {
     from {
         opacity: 0;
-        height: 85px;
+        height: 10%;
     }
 
     to {
         opacity: 1;
-        height: 118px;
+        height: 100%;
     }
 }
 
 @keyframes slideIn {
     from {
         opacity: 0;
-        height: 85px;
+        height: 20%;
     }
 
     to {
         opacity: 1;
-        height: 45px;
+        height: 100%;
     }
 }
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+  }
+
+
+.home-menu {
+    display: block;
+    fill: none;
+    height: 16px;
+    width: 16px;
+    stroke: currentColor;
+    stroke-width: 3;
+    overflow: visible;
+}
+
+.home-account {
+    display: block;
+    height: 30px;
+    width: 30px;
+    fill: currentColor;
+}
+
+.home-border1 {
+    display: flex;
+    height: 2vw;
+    align-self: center;
+}
+
+.home-border {
+    height: 21px;
+}
+
+  .search-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 50px;
+    height: 60%;
+    padding: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+  }
+  
+  .search-bar.active {
+    background-color: #ebebeb;
+  }
+  
+  .search-item {
+    padding: 10px 20px;
+    border-radius: 50px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    text-align: center;
+    flex: 1;
+  }
+  
+  .search-item:hover {
+    background-color: #d9d9d9;
+  }
+  
+  .search-item.active {
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .search-item label {
+    display: block;
+    font-size: 14px;
+    color: #454444;
+    font-weight: 550;
+  }
+  
+  .search-item input {
+    border: none;
+    outline: none;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    color: #888;
+    background: transparent;
+  }
+  
+  .search-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ff385c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .search-button:hover {
+    background-color: #e31e49;
+  }
+  

@@ -6,24 +6,6 @@
 .home-border {
     height: 21px;
 }
-
-.home-menu {
-    display: block;
-    fill: none;
-    height: 16px;
-    width: 16px;
-    stroke: currentColor;
-    stroke-width: 3;
-    overflow: visible;
-}
-
-.home-account {
-    display: block;
-    height: 100%;
-    width: 100%;
-    fill: currentColor;
-}
-
 .home-img{
     width: 322px;
     height: 307px;
@@ -40,16 +22,6 @@
     padding: 20px;
     z-index: 555;
 }
-
-/* .home-container{
-    display: flex;
-    flex-direction: column;
-    height: 350px;
-    width: 300px;
-    border: none;
-    background-color: #fff;
-    border-radius: 10px;
-} */
 .home-contain{
     display: flex;
     flex-direction: column;
