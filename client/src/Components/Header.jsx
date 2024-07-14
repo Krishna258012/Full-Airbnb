@@ -9,17 +9,23 @@ const Header = () => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [activeItem, setActiveItem] = useState(null);
+  const [showGuest, setShowGuest] = useState(false);
+  const [guest, setGuest] = useState(0);
 
   const handleItemClick = (item) => {
     setActiveItem(item);
+    if (item !== "who") {
+      setShowGuest(false);
+    }
   };
+
 
   const handleClickOutside = (event) => {
     if (!event.target.closest(".search-bar")) {
       setActiveItem(null);
     }
   };
-  console.log(startDate, endDate);
+  // console.log(startDate, endDate);
 
   const today = new Date();
   const handleSearch = () => {
@@ -79,9 +85,8 @@ const Header = () => {
             id="searchBar"
           >
             <div
-              className={`search-item ${
-                activeItem === "where" ? "active" : ""
-              }`}
+              className={`search-item ${activeItem === "where" ? "active" : ""
+                }`}
               id="where"
               onClick={() => handleItemClick("where")}
             >
@@ -94,9 +99,8 @@ const Header = () => {
               />
             </div>
             <div
-              className={`search-item ${
-                activeItem === "checkin" ? "active" : ""
-              }`}
+              className={`search-item ${activeItem === "checkin" ? "active" : ""
+                }`}
               id="checkin"
               onClick={() => handleItemClick("checkin")}
             >
@@ -113,9 +117,8 @@ const Header = () => {
               />
             </div>
             <div
-              className={`search-item ${
-                activeItem === "checkout" ? "active" : ""
-              }`}
+              className={`search-item ${activeItem === "checkout" ? "active" : ""
+                }`}
               id="checkout"
               onClick={() => handleItemClick("checkout")}
             >
@@ -134,115 +137,98 @@ const Header = () => {
             <div
               className={`search-item ${activeItem === "who" ? "active" : ""}`}
               id="who"
-              onClick={() => handleItemClick("who")}
+              style={{ position: "relative" }}
+              onClick={() => {
+                handleItemClick("who");
+              }}
             >
               <label htmlFor="whoInput">Who</label>
-              <input
-                type="number"
-                id="whoInput"
-                placeholder="Add guests"
-                aria-label="Add guests"
-              />
+              <div
+                onClick={() => {
+                  if (!showGuest) {
+                    setShowGuest(true);
+                  } else {
+                    setShowGuest(false);
+                  }
+                }}
+              >
+                <input
+                  style={{ display: "none" }}
+                  type="button"
+                  id="whoInput"
+                  placeholder="Add guests"
+                  aria-label="Add guests"
+                />{guest === 0 ? (
+                  "Add guest"
+                ) : (
+                  <span style={{ fontWeight: "bold" }}>{`${guest} guest`}</span>
+                )}
+              </div>
+              <div>
+                {showGuest ? (
+                  <div className="add-guest-text">
+                    <div className="add-guest-all">
+                      <div className="guest">Add guest</div>
+                      <div className="all-guest-button">
+                        <button
+                          className="guest-button rounded-circle"
+                          onClick={() => {
+                            if (guest > 0) {
+                              setGuest(guest - 1);
+                            }
+                          }}
+                        >
+                          <svg
+                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                            viewBox="0 0 12 12"
+                            xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true"
+                            role="presentation"
+                            focusable="false"
+                            className="guest-icon"
+                            width="12"
+                            height="12"
+                          >
+                            <path
+                              d="m.75 6.75h10.5v-1.5h-10.5z"
+                              fill="#EBEBEB"
+                            ></path>
+                          </svg>
+                        </button>
+                        <div>{guest}</div>
+                        <button
+                          className="guest-button rounded-circle"
+                          onClick={() => setGuest(guest + 1)}
+                        >
+                          <svg
+                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                            viewBox="0 0 12 12"
+                            xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true"
+                            role="presentation"
+                            focusable="false"
+                            className="guest-icon"
+                            width="12"
+                            height="12"
+                          >
+                            <path
+                              d="m6.75.75v4.5h4.5v1.5h-4.5v4.5h-1.5v-4.5h-4.5v-1.5h4.5v-4.5z"
+                              fill="#6A6A6A"
+                            ></path>
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
             </div>
+
             <button className="search-button">Search</button>
           </div>
         ) : (
-          // <div
-          //   style={{ backgroundColor: "#fff", border: "none" }}
-          //   className="header-three-data fade-in"
-          // >
-          //   <div className="border border-2 rounded-pill head-Link-All">
-          //     <div className={`header-Link ${isFocused ? "focusedd" : "not"}`}>
-          //       <label
-          //         htmlFor="destination"
-          //         className={`label ${isFocused ? "focuse" : "not"}`}
-          //       >
-          //         where
-          //       </label>
-          //       <input
-          //         type="text"
-          //         id="destination"
-          //         className={`border-input ${isFocused ? "focused" : "nott"}`}
-          //         placeholder="where"
-          //         onFocus={handleFocus}
-          //         onBlur={handleBlur}
-          //       />
-          //     </div>
-          //     <div className="home-border1 border-end border-2"></div>
-
-          //     <div className={`header-check ${
-          //           isCheckIn ? "checkin-header" : "not-checkin-label"
-          //         }`}>
-          //       <label
-          //         htmlFor="checkin"
-          //         className={`Check ${
-          //           isCheckIn ? "checkin-label" : "not-checkin-label"
-          //         }`}
-          //       >
-          //         Check-In
-          //       </label>
-          // <DatePicker
-          //   selected={startDate}
-          //   onChange={(date) => setStartDate(date)}
-          //   selectsStart
-          //   startDate={startDate}
-          //   endDate={endDate}
-          //   minDate={today}
-          //   id="checkin"
-          //   className={`${isCheckIn ? "checkin" : "not-checkin"}`}
-          //   placeholderText="Check-in"
-          //   onFocus={handleCheckIn}
-          //   onBlur={handleCheckInRem}
-          // />
-          //     </div>
-          //     <div className="home-border1 border-end border-2"></div>
-
-          //     <div className="header-check">
-          //       <label htmlFor="checkout" className="Check">
-          //         Check-Out
-          //       </label>
-          // <DatePicker
-          //   selected={endDate}
-          //   onChange={(date) => setEndDate(date)}
-          //   selectsEnd
-          //   startDate={startDate}
-          //   id="checkout"
-          //   endDate={endDate}
-          //   className={`${isFocused ? "checkin" : "not-checkin"}`}
-          //   minDate={startDate || today}
-          //   placeholderText="Check-out"
-          // />
-          //     </div>
-
-          //     <div className="home-border1 border-end border-2"></div>
-          //     <div className="who-all">
-          //       <div className="who">WHo</div>
-          //       <div
-          //         style={{ backgroundColor: "#ff385d", border: "none" }}
-          //         className="d-flex align-self-center p-2 rounded-pill who-search"
-          //       >
-          //         <svg
-          //           xmlnsXlink="http://www.w3.org/1999/xlink"
-          //           xmlns="http://www.w3.org/2000/svg"
-          //           viewBox="0 0 32 32"
-          //           className="svg"
-          //           aria-hidden="true"
-          //           role="presentation"
-          //           focusable="false"
-          //           width="32"
-          //           height="32"
-          //         >
-          //           <path
-          //             fill="none"
-          //             d="M13 24a11 11 0 1 0 0-22 11 11 0 0 0 0 22zm8-3 9 9"
-          //             stroke="#FFFFFF"
-          //             strokeWidth="4px"
-          //           ></path>
-          //         </svg>
-          //       </div>
-          //     </div>
-          //   </div>
-          // </div>
           <button
             onClick={handleSearch}
             style={{ backgroundColor: "#fff", border: "none" }}
@@ -322,24 +308,7 @@ const Header = () => {
             </svg>
           </button>
         </div>
-        {/* <ul>
-            <li>
-              <a href="/Signup">Signup</a>
-            </li>
-            <li>
-              <a href="/Sigup">Signup</a>
-            </li>
-          </ul> */}
       </header>
-      {/* {showhead && (
-        <div className="header-main">
-        <div className="header-content">
-          <h2>hi</h2>
-          <h3>hiii</h3>
-          <h1>hello</h1>
-        </div>
-      </div>
-      )} */}
     </div>
   );
 };
