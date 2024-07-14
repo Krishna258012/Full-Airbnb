@@ -229,6 +229,30 @@ body {
   }
 
 
+  @media (max-width: 1000px) {
+
+    .search-bar{
+      max-width: 900px;
+    }
+    .add-guest-text{
+      width: 300px;
+      height: 70px;
+      left: -25%;
+    }
+}
+
+@media (max-width: 850px) {
+
+  .search-bar{
+    max-width: 750px;
+  }
+  .add-guest-text{
+    width: 300px;
+    height: 70px;
+      left: -40%;
+  }
+}
+
 
 
 
