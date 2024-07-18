@@ -42,6 +42,8 @@ const Header = () => {
         setShowhead(true);
       }
     };
+
+
     window.addEventListener("scroll", handleScroll);
 
     return () => {
@@ -59,7 +61,7 @@ const Header = () => {
   return (
     <div className="header-all">
       <header className="header-header">
-        <div className="align-self-center">
+        <div className="align-self-center header-none">
           <svg
             xmlnsXlink="http://www.w3.org/1999/xlink"
             xmlns="http://www.w3.org/2000/svg"
@@ -81,7 +83,7 @@ const Header = () => {
         {/* All Three Data */}
         {showhead ? (
           <div
-            className={`search-bar fade-in ${activeItem ? "active" : ""}`}
+            className={`search-bar header-none fade-in ${activeItem ? "active" : ""}`}
             id="searchBar"
           >
             <div
@@ -232,7 +234,7 @@ const Header = () => {
           <button
             onClick={handleSearch}
             style={{ backgroundColor: "#fff", border: "none" }}
-            className="header-three-data slide-in"
+            className=" header-none header-three-data slide-in"
           >
             <div className="border border-2 d-flex gap-3 p-1 rounded-pill  align-items-center">
               <div className="fw-semibold ms-2 ">Anywhere</div>
@@ -242,7 +244,7 @@ const Header = () => {
               <div className="">Any guests</div>
               <div
                 style={{ backgroundColor: "#ff385d", border: "none" }}
-                className="d-flex align-self-center p-2 rounded-pill"
+                className="d-flex align-self-center p-2 rounded-pill "
               >
                 <svg
                   xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -268,7 +270,7 @@ const Header = () => {
         )}
 
         {/* now account and  */}
-        <div>
+        <div className="header-none">
           <button className="header-border border border-2 gap-1 ps-2 p-1 align-items-center bg-body">
             <svg
               xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -308,6 +310,11 @@ const Header = () => {
             </svg>
           </button>
         </div>
+        <button className="mobile-header-all rounded-pill">
+            <div className="mobile-search">
+            <svg xmlnsXlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false" className="mobile-svg" width="32" height="32"><path d="M13 0a13 13 0 0 1 10.5 20.67l7.91 7.92-2.82 2.82-7.92-7.91A12.94 12.94 0 0 1 13 26a13 13 0 1 1 0-26zm0 4a9 9 0 1 0 0 18 9 9 0 0 0 0-18z" fill="#222222"></path></svg>
+            </div>
+        </button>
       </header>
     </div>
   );
