@@ -35,9 +35,7 @@
     border-radius: 10px;
     text-align: justify;
 }
-
-
-@media(min-width:50px) and (max-width:550px) {
+/* @media(min-width:0px) and (max-width:240px) {
     .home-img {
         width: 100%;
         height: auto;
@@ -45,6 +43,22 @@
 
     .home-contain {
         width: 100%;
+    }
+
+    .home-all {
+        padding: 20px;
+    }
+} */
+
+@media(min-width:0px) and (max-width:550px) {
+    .home-img {
+        width: 100%;
+        height: max-content;
+    }
+
+    .home-contain {
+        width: 100%;
+        height: 100%;
     }
 
     .home-all {
