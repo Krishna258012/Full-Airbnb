@@ -260,7 +260,7 @@ body {
   }
 }
 
-.mobile-header-all{
+.mobile-header-all {
   display: none;
 }
 
@@ -291,7 +291,8 @@ body {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     border: none;
   }
-  .mobile-search{
+
+  .mobile-search {
     border: none;
   }
 
@@ -303,6 +304,91 @@ body {
     background-color: transparent;
   }
 }
+
+.mobile-nav-svg {
+  display: block;
+  fill: none;
+  height: 14px;
+  width: 14px;
+  stroke: currentcolor;
+  stroke-width: 5.33333;
+  overflow: visible;
+}
+
+.close-btn{
+  border-radius: 50%;
+  border: 1px solid #888;
+  background-color: #ffff;
+  padding: 6px;
+}
+.close-btn:hover{
+  border: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+.popup {
+  position: absolute;
+  top: 0%;
+  background-color: #f7f7f7;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  height: 100vh;
+  width: 100%;
+}
+
+.popup-content {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  row-gap: 8px;
+}
+.mobile-nav-where{
+  display: flex;
+  row-gap: 10px;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.mobile-nav-where input{
+  padding: 15px;
+  border-radius: 15px;
+  border: 1px solid #777;
+}
+.mobile-nav-where label{
+  font-weight: bold;
+  font-size: 22px;
+  overflow: hidden;
+}
+
+.popup-open {
+  overflow: hidden;
+  height: 100vh;
+}
+.mobile-date {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  padding: 25px 0px 25px 25px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.mobile-date input{
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background: transparent;
+  text-align: center;
+  margin-left: auto;
+}
+.mobile-date  label{
+  margin-right: auto;
+  font-weight: bold;
+  overflow: auto;
+}
+
 
 
 

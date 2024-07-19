@@ -10,6 +10,7 @@ const Header = () => {
   const [endDate, setEndDate] = useState(null);
   const [activeItem, setActiveItem] = useState(null);
   const [showGuest, setShowGuest] = useState(false);
+  const [showMobile, setShowMobile] = useState(false);
   const [guest, setGuest] = useState(0);
 
   const handleItemClick = (item) => {
@@ -310,11 +311,159 @@ const Header = () => {
             </svg>
           </button>
         </div>
-        <button className="mobile-header-all rounded-pill">
+        
+        {showMobile ?(
+           <div className="popup">
+            <button className="close-btn" onClick={()=>{ setShowMobile(false) ;
+            document.body.classList.remove('popup-open'); }}><svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false" className="mobile-nav-svg" width="32" height="32"><path d="m6 6 20 20M26 6 6 26" stroke="#222222" fill="none" stroke-width="5.33333px"></path></svg></button>
+           <div className="popup-content">
+             {/* <h2>Popup</h2>
+             <p>This is a popup!</p> */}
+             <div className="mobile-nav-where">
+              <label htmlFor="whereInput">Where to ?</label>
+              <input
+                type="text"
+                id="whereInput"
+                placeholder="Search destinations"
+                aria-label="Search destinations"
+              />
+              {/* <div cl>Suggestions</div> */}
+            </div>
+             
+            <div
+              className="mobile-date"
+            >
+              <label htmlFor="checkinInput">Check in</label>
+              <DatePicker
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                selectsStart
+                startDate={startDate}
+                endDate={endDate}
+                minDate={today}
+                id="checkinInput"
+                placeholderText="Add dates"
+              />
+            </div>
+            <div className="mobile-date">
+              <label htmlFor="checkoutInput">Check out</label>
+              <DatePicker
+                selected={endDate}
+                onChange={(date) => setEndDate(date)}
+                selectsEnd
+                startDate={startDate}
+                id="checkoutInput"
+                endDate={endDate}
+                minDate={startDate || today}
+                placeholderText="Add dates"
+              />
+            </div>
+
+
+            <div
+              className="mobile-date"
+              id="who"
+              style={{ position: "relative" }}
+              onClick={() => {
+                handleItemClick("who");
+              }}
+            >
+              <label htmlFor="whoInput">Who</label>
+              <div
+                onClick={() => {
+                  if (!showGuest) {
+                    setShowGuest(true);
+                  } else {
+                    setShowGuest(false);
+                  }
+                }}
+              >
+                <input
+                  style={{ display: "none" }}
+                  type="button"
+                  id="whoInput"
+                  placeholder="Add guests"
+                  aria-label="Add guests"
+                />{guest === 0 ? (
+                  "Add guest"
+                ) : (
+                  <span style={{ fontWeight: "bold" }}>{`${guest} guest`}</span>
+                )}
+              </div>
+              <div>
+                {showGuest ? (
+                  <div className="add-guest-text">
+                    <div className="add-guest-all">
+                      <div className="guest">Add guest</div>
+                      <div className="all-guest-button">
+                        <button
+                          className="guest-button rounded-circle"
+                          onClick={() => {
+                            if (guest > 0) {
+                              setGuest(guest - 1);
+                            }
+                          }}
+                        >
+                          <svg
+                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                            viewBox="0 0 12 12"
+                            xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true"
+                            role="presentation"
+                            focusable="false"
+                            className="guest-icon"
+                            width="12"
+                            height="12"
+                          >
+                            <path
+                              d="m.75 6.75h10.5v-1.5h-10.5z"
+                              fill="#EBEBEB"
+                            ></path>
+                          </svg>
+                        </button>
+                        <div>{guest}</div>
+                        <button
+                          className="guest-button rounded-circle"
+                          onClick={() => setGuest(guest + 1)}
+                        >
+                          <svg
+                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                            viewBox="0 0 12 12"
+                            xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true"
+                            role="presentation"
+                            focusable="false"
+                            className="guest-icon"
+                            width="12"
+                            height="12"
+                          >
+                            <path
+                              d="m6.75.75v4.5h4.5v1.5h-4.5v4.5h-1.5v-4.5h-4.5v-1.5h4.5v-4.5z"
+                              fill="#6A6A6A"
+                            ></path>
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
+            </div>
+
+
+           </div>
+         </div>
+        ):(
+          <button className="mobile-header-all rounded-pill" onClick={()=>{ setShowMobile(true) ;
+            document.body.classList.add('popup-open'); }}>
             <div className="mobile-search">
             <svg xmlnsXlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false" className="mobile-svg" width="32" height="32"><path d="M13 0a13 13 0 0 1 10.5 20.67l7.91 7.92-2.82 2.82-7.92-7.91A12.94 12.94 0 0 1 13 26a13 13 0 1 1 0-26zm0 4a9 9 0 1 0 0 18 9 9 0 0 0 0-18z" fill="#222222"></path></svg>
             </div>
         </button>
+        )
+      }
       </header>
     </div>
   );
