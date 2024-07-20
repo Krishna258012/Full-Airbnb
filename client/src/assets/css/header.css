@@ -364,21 +364,23 @@ body {
 .mobile-search-button {
   display: flex;
   align-items: center;
-  width: 120px;
-  height: 45px;
+  width: 150px;
+  height: 50px;
   justify-content: space-evenly;
   padding: 10px;
   background-color: #ef1a72;
   color: #fff;
   border: none;
   border-radius: 10px;
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .mobile-serach {
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  flex-grow: 1;
+  flex-grow: 0.72;
 }
 
 
