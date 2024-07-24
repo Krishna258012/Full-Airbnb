@@ -38,4 +38,6 @@ const getListings = async (req, res) => {
   }
 };
 
-module.exports = { getListings };
+
+
+module.exports = { getListings};

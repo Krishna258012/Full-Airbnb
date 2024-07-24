@@ -129,6 +129,7 @@ body {
   transition: background-color 0.3s, box-shadow 0.3s;
   cursor: pointer;
   text-align: center;
+  position: relative;
   flex: 1;
 }
 
@@ -281,6 +282,7 @@ body {
 
 .mobile-nav-where {
   display: flex;
+  position: relative;
   row-gap: 10px;
   flex-direction: column;
   background-color: #fff;
@@ -299,6 +301,19 @@ body {
   font-weight: bold;
   font-size: 22px;
   overflow: hidden;
+}
+
+.mobile-show-suggestions{
+  position: absolute;
+  width: 90%;
+  background-color: #ffffff;
+  top: 25%;
+  padding: 0 20px;
+  z-index: 999;
+  max-height: 30%;
+  border-radius: 10px;
+  overflow-y: scroll;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
 .popup-open {
@@ -495,10 +510,25 @@ body {
   }
 }
 
+.show-suggestions{
+  position: absolute;
+  top: 90%;
+  background-color: #fff;
+  width: 25%;
+  padding: 20px;
+  max-height: 200%;
+  overflow-y: scroll;
+  border-radius: 10px;
+}
+.all-suggestions-text{
+  cursor: pointer;
+  padding: 5px;
+}
 
-
-
-
+.all-suggestions-text:hover{
+  background-color: #ededed;
+  width: 100%;
+}
 
 
 

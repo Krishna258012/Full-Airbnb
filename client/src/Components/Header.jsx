@@ -4,6 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+
 const Header = () => {
   const [showhead, setShowhead] = useState(true);
   const [startDate, setStartDate] = useState(null);
@@ -12,11 +13,20 @@ const Header = () => {
   const [showGuest, setShowGuest] = useState(false);
   const [showMobile, setShowMobile] = useState(false);
   const [guest, setGuest] = useState(0);
+  const [inputValue, setInputValue] = useState("")
+  const [suggestions, setSuggestions] = useState("");
+  const [showSuggestion, setShowSuggestion] = useState(false)
+
+
+  const Domain = import.meta.env.VITE_DOMAIN;
 
   const handleItemClick = (item) => {
     setActiveItem(item);
     if (item !== "who") {
       setShowGuest(false);
+    }
+    if (item !== "where") {
+      setShowSuggestion(false)
     }
   };
 
@@ -33,6 +43,7 @@ const Header = () => {
     if (!showhead) {
       setShowhead(true);
     }
+
   };
 
   useEffect(() => {
@@ -58,6 +69,39 @@ const Header = () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
+
+  //////////All Autocomplete Search Lists js Codes
+
+  const handlechange = (e) => {
+    const value = e.target.value
+    setInputValue(value)
+    if (value) {
+      fetchSuggestion(value)
+    } else {
+      setSuggestions([])
+    }
+  }
+
+
+  const fetchSuggestion = async (searchQuery) => {
+    const encodeInput = encodeURIComponent(searchQuery);
+    // if (searchQuery !== "") {
+    fetch(`${Domain}api/autocomplete?destination=${encodeInput}`)
+      .then((res) => res.json())
+      .then((all) => setSuggestions(all))
+      .catch((err) => { console.log(err); })
+    // } else {
+    //   console.log("nothing ");
+    // }
+  }
+
+  const handleSuggestion = (element) => {
+    setInputValue(element.address.street)
+    console.log(element.address.street);
+    setSuggestions("")
+  }
+
 
   return (
     <div className="header-all">
@@ -99,8 +143,29 @@ const Header = () => {
                 id="whereInput"
                 placeholder="Search destinations"
                 aria-label="Search destinations"
+                value={inputValue}
+                onChange={handlechange}
+                autoComplete="off"
+                onClick={() => {
+                  if (!showSuggestion) {
+                    setShowSuggestion(true);
+                  } else {
+                    setShowSuggestion(false);
+                  }
+                }}
               />
             </div>
+            {showSuggestion ? (inputValue !== "" ?
+              <div className="show-suggestions">
+                <div className="all-suggestions">{suggestions && suggestions.map((element, index) => (
+                  <div key={index} onClick={() => handleSuggestion(element)} className="all-suggestions-text">
+                    {element.address.street}
+                  </div>
+                ))}</div>
+              </div>
+
+              : ""
+            ) : ("")}
             <div
               className={`search-item ${activeItem === "checkin" ? "active" : ""
                 }`}
@@ -322,14 +387,32 @@ const Header = () => {
               <div className="mobile-nav-where">
                 <label htmlFor="whereInput">Where to ?</label>
                 <input
-                  type="text"
-                  id="mobile-whereInput"
-                  required
-                  placeholder="Search destinations"
-                  aria-label="Search destinations"
+                   type="text"
+                   id="whereInput"
+                   placeholder="Search destinations"
+                   aria-label="Search destinations"
+                   value={inputValue}
+                   onChange={handlechange}
+                   autoComplete="off"
+                   onClick={() => {
+                     if (!showSuggestion) {
+                       setShowSuggestion(true);
+                     } 
+                   }}
                 />
                 {/* <div cl>Suggestions</div> */}
               </div>
+              {showSuggestion ? (inputValue !== "" ?
+              <div className="mobile-show-suggestions">
+                <div className="all-suggestions">{suggestions && suggestions.map((element, index) => (
+                  <div key={index} onClick={() => handleSuggestion(element)} className="all-suggestions-text">
+                    {element.address.street}
+                  </div>
+                ))}</div>
+              </div>
+
+              : ""
+            ) : ("")}
 
               <div
                 className="mobile-date"
@@ -456,12 +539,12 @@ const Header = () => {
 
 
 
-              
+
             </div>
             <div className="mobile-serach">
-                <button className="mobile-search-button">
-                  <svg xmlnsXlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false" className="mobile-search-svg" width="32" height="32"><path d="M13 0a13 13 0 0 1 10.5 20.67l7.91 7.92-2.82 2.82-7.92-7.91A12.94 12.94 0 0 1 13 26a13 13 0 1 1 0-26zm0 4a9 9 0 1 0 0 18 9 9 0 0 0 0-18z" fill="#FFFFFF"></path></svg>Search</button>
-              </div>
+              <button className="mobile-search-button">
+                <svg xmlnsXlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false" className="mobile-search-svg" width="32" height="32"><path d="M13 0a13 13 0 0 1 10.5 20.67l7.91 7.92-2.82 2.82-7.92-7.91A12.94 12.94 0 0 1 13 26a13 13 0 1 1 0-26zm0 4a9 9 0 1 0 0 18 9 9 0 0 0 0-18z" fill="#FFFFFF"></path></svg>Search</button>
+            </div>
 
           </div>
         ) : (
@@ -471,16 +554,16 @@ const Header = () => {
           }}>
             <div className="mobile-search">
               <svg xmlnsXlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false" className="mobile-svg" width="32" height="32"><path d="M13 0a13 13 0 0 1 10.5 20.67l7.91 7.92-2.82 2.82-7.92-7.91A12.94 12.94 0 0 1 13 26a13 13 0 1 1 0-26zm0 4a9 9 0 1 0 0 18 9 9 0 0 0 0-18z" fill="#222222"></path></svg>
-              
+
             </div>
             <div className="mobile-all-search">
-                <div className="mobile-where-search">Where to?</div>
-                <div className="mobile-three-text">
-                  <div>Anywhere</div><span>•</span>
-                  <div>Any week</div><span>•</span>
-                  <div>Add guests</div>
-                </div>
+              <div className="mobile-where-search">Where to?</div>
+              <div className="mobile-three-text">
+                <div>Anywhere</div><span>•</span>
+                <div>Any week</div><span>•</span>
+                <div>Add guests</div>
               </div>
+            </div>
           </button>
         )
         }
