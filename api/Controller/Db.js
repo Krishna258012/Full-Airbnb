@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const Dburl = "mongodb+srv://informerkrishna:123456789kK$@cluster0.vz8dndj.mongodb.net/sample_airbnb?retryWrites=true&w=majority&appName=Cluster0";
+const Dburl = process.env.MONGO;
 
 const connection = mongoose.connect(Dburl)
 .then((res)=>{console.log("Database Connected Successfully")})
