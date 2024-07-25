@@ -98,7 +98,6 @@ const Header = () => {
 
   const handleSuggestion = (element) => {
     setInputValue(element.address.street)
-    console.log(element.address.street);
     setSuggestions("")
   }
 
