@@ -1,33 +1,27 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-
-name: Node.js CI
+name: Deploy to VPS
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    branches:
+      - master
 
 jobs:
-  build:
-
+  deploy:
     runs-on: self-hosted
 
-    # strategy:
-    #   matrix:
-    #     node-version: [18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
-    # - uses: actions/checkout@v4
-    # - name: Use Node.js ${{ matrix.node-version }}
-    #   uses: actions/setup-node@v3
-    #   with:
-    #     node-version: ${{ matrix.node-version }}
-    #     cache: 'npm'
-    # - run: npm ci
-    - run: cd home/ubuntu/Krishna/Airbnb/_work/Full-Airbnb/Full-Airbnb
-    - run: cd api
-    - run: npm install
-    - run: pm2 restart Airbnb-api || pm2 start npm --name "Airbnb-api" -- start
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Deploy to server
+        run: |
+          cd /home/ubuntu/Krishna/Full-Airbnb
+          git pull origin master
+          cd api
+          npm install
+          pm2 restart Airbnb-Api || pm2 start npm --name "Airbnb-Api" -- start
