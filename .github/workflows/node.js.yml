@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: '14'
 
-      - name: Deploy to server
+      - name: Deploy to server With
         run: |
           cd /home/ubuntu/Krishna/Full-Airbnb
           git pull origin master
