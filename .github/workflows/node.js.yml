@@ -1,0 +1,27 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Deploy to server
+        run: |
+          cd /home/ubuntu/Krishna/Full-Airbnb
+          git pull origin master
+          cd api
+          npm install
+          pm2 restart Airbnb-Api || pm2 start npm --name "Airbnb-Api" -- start
