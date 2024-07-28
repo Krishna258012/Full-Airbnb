@@ -24,4 +24,5 @@ jobs:
           git pull origin master
           cd api
           npm install
+          ls
           pm2 restart Airbnb-Api || pm2 start npm --name "Airbnb-Api" -- start
