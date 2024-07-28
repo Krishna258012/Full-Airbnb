@@ -27,7 +27,7 @@ jobs:
     #     node-version: ${{ matrix.node-version }}
     #     cache: 'npm'
     # - run: npm ci
-    # # - run: npm run build --if-present
+    - run: open '/home/ubuntu/Krishna/Airbnb/_work/Full-Airbnb/Full-Airbnb
     - run: cd api
     - run: npm install
     - run: pm2 restart Airbnb-api || pm2 start npm --name "Airbnb-api" -- start
