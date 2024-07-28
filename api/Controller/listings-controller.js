@@ -26,7 +26,7 @@ const getListings = async (req, res) => {
   }
   // console.log("Query Object Filter: ", queryObjFilter);
   try {
-    const data = await listing.find().select('_id name images price').limit(15);
+    const data = await listing.find().select('_id name images address price').limit(15);
     return res
       .status(200)
       .send({ message: "Data Fetched Successfully", data: data });
