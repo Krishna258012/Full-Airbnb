@@ -1,10 +1,9 @@
 import React from "react";
 import "../assets/css/home.css";
 import GetUseFetch from "./GetUseFetch";
-const Domain = import.meta.env.VITE_DOMAIN;
 
-const Home = () => {
-  const [productData] = GetUseFetch(Domain + "api/listings");
+const Home = ({ apipath }) => {
+  const [productData] = GetUseFetch(apipath);
 
   const fullData = productData?.data;
 
