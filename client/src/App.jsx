@@ -9,7 +9,6 @@ import Login from './Components/Login'
 function App() {
   const location = useLocation();
   const noHeaderPaths = ['/account'];
-console.log(location.pathname.toLowerCase())
   const shouldShowHeader = !noHeaderPaths.includes(location.pathname.toLowerCase());
   return (
     <>
