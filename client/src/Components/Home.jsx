@@ -5,7 +5,6 @@ import GetUseFetch from "./GetUseFetch";
 const Home = ({ apipath }) => {
   const [productData,isLoading] = GetUseFetch(apipath);
   const fullData = productData?.data;
-  console.log(isLoading);
 
   if (isLoading) {
     return <div className="home-loading"><div className="newtons-cradle">

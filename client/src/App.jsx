@@ -4,10 +4,11 @@ import Header from './Components/Header';
 import HOmepage from './Components/HOmepage';
 import Search from './Components/Search';
 import Login from './Components/Login';
+import Signup from './Components/Signup';
 
 function App() {
   const location = useLocation();
-  const noHeaderPaths = ['/account'];
+  const noHeaderPaths = ['/login','/signup'];
 
   const shouldShowHeader = !noHeaderPaths.includes(location.pathname.toLowerCase());
 
@@ -17,7 +18,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HOmepage />} />
         <Route path="/search" element={<Search />} />
-        <Route path="/account" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
     </>
   );
