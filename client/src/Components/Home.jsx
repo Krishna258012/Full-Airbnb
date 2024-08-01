@@ -3,8 +3,18 @@ import "../assets/css/home.css";
 import GetUseFetch from "./GetUseFetch";
 
 const Home = ({ apipath }) => {
-  const [productData] = GetUseFetch(apipath);
+  const [productData,isLoading] = GetUseFetch(apipath);
   const fullData = productData?.data;
+  console.log(isLoading);
+
+  if (isLoading) {
+    return <div className="home-loading"><div className="newtons-cradle">
+    <div className="newtons-cradle__dot"></div>
+    <div className="newtons-cradle__dot"></div>
+    <div className="newtons-cradle__dot"></div>
+    <div className="newtons-cradle__dot"></div>
+    </div></div>
+  }
 
   return (
     <div className="home-all">
