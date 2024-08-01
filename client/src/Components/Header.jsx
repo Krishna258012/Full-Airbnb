@@ -562,11 +562,12 @@ const Header = () => {
 
             </div>
             <div className="mobile-all-search">
-              <div className="mobile-where-search">Where to?</div>
+              <div className="mobile-where-search">{inputValue ? inputValue : "Where to?"}</div>
               <div className="mobile-three-text">
-                <div>Anywhere</div><span>•</span>
-                <div>Any week</div><span>•</span>
-                <div>Add guests</div>
+                <div>{inputValue ? "" : <span>Anywhere<span>•</span></span>}
+                </div>
+                <div>{startDate && endDate ? `${stDate}-${enDate}` : `Any week`}</div><span>•</span>
+                <div>{guest ? <span>{`${guest} guest`}</span> : `Add guests`}</div>
               </div>
             </div>
           </button>
