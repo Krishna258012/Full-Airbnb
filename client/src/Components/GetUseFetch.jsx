@@ -6,7 +6,6 @@ const GetUseFetch = (url) => {
     fetch(url)
     .then((res)=>res.json())
     .then((data)=>setData(data))
-    console.log("Test is successful");
   //   axios.get(url)
   // .then(response => response.data)
   // .then(data => setData(data));

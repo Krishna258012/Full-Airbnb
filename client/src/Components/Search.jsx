@@ -14,8 +14,7 @@ const Search = () => {
     const url = `street=${encodeURIComponent(destination)}`;
     const Domain = import.meta.env.VITE_DOMAIN;
     const tect = `${Domain}api/listings?${url}`;
-    console.log(tect);
-   
+
     return (
         <Home apipath={`${Domain}api/listings?${url}`} />
     )

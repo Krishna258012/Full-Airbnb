@@ -4,7 +4,6 @@ import GetUseFetch from "./GetUseFetch";
 
 const Home = ({ apipath }) => {
   const [productData] = GetUseFetch(apipath);
-console.log(apipath);
   const fullData = productData?.data;
 
   return (
@@ -12,7 +11,6 @@ console.log(apipath);
       {fullData &&
         fullData.map((product) => (
           <button key={product._id} className="home-contain">
-            {/* <div>{product.name}</div> */}
             <img
               loading="lazy"
               className="home-img"
