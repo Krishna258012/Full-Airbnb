@@ -543,10 +543,12 @@ const Header = () => {
 
             </div>
             <div className="mobile-serach" onClick={() => {
-              setShowMobile(false);}}>
+              setShowMobile(false);
+              document.body.classList.remove('popup-open');
+            }}>
               <Link className="mobile-search-button" to={`/search?${queryString}`}>
                 <svg xmlnsXlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false" className="mobile-search-svg" width="32" height="32"><path d="M13 0a13 13 0 0 1 10.5 20.67l7.91 7.92-2.82 2.82-7.92-7.91A12.94 12.94 0 0 1 13 26a13 13 0 1 1 0-26zm0 4a9 9 0 1 0 0 18 9 9 0 0 0 0-18z" fill="#FFFFFF"></path></svg>Search
-                </Link>
+              </Link>
             </div>
 
           </div>
