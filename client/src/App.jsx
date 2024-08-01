@@ -9,11 +9,7 @@ function App() {
   const location = useLocation();
   const noHeaderPaths = ['/account'];
 
-  console.log("Current Pathname:", location.pathname); // Debugging log
-
   const shouldShowHeader = !noHeaderPaths.includes(location.pathname.toLowerCase());
-
-  console.log("Should Show Header:", shouldShowHeader); // Debugging log
 
   return (
     <>
