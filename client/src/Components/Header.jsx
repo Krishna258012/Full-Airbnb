@@ -3,6 +3,7 @@ import "../assets/css/header.css";
 import { Link, NavLink } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import moment from 'moment';
 
 
 const Header = () => {
@@ -30,13 +31,18 @@ const Header = () => {
     }
   };
 
+  // const isFormValid = inputValue && startDate && endDate && guest;
+  const stDate = moment(startDate).format("DD/MM/YYYY");
+  const enDate = moment(endDate).format("DD/MM/YYYY");
+  const queryString = `location=${encodeURIComponent(inputValue)}&checkin=${encodeURIComponent(stDate)}&checkout=${encodeURIComponent(enDate)}&persons=${encodeURIComponent(guest)}`;
+
+
 
   const handleClickOutside = (event) => {
     if (!event.target.closest(".search-bar")) {
       setActiveItem(null);
     }
   };
-  // console.log(startDate, endDate);
 
   const today = new Date();
   const handleSearch = () => {
@@ -79,26 +85,22 @@ const Header = () => {
     if (value) {
       fetchSuggestion(value)
     } else {
-      setSuggestions([])
+      setSuggestions("")
     }
   }
 
 
   const fetchSuggestion = async (searchQuery) => {
     const encodeInput = encodeURIComponent(searchQuery);
-    // if (searchQuery !== "") {
     fetch(`${Domain}api/autocomplete?destination=${encodeInput}`)
       .then((res) => res.json())
       .then((all) => setSuggestions(all))
       .catch((err) => { console.log(err); })
-    // } else {
-    //   console.log("nothing ");
-    // }
   }
 
   const handleSuggestion = (element) => {
-    setInputValue(element.address.street)
-    setSuggestions("")
+    setInputValue(element.value)
+    setShowSuggestion(false)
   }
 
 
@@ -130,7 +132,7 @@ const Header = () => {
             className={`search-bar header-none fade-in ${activeItem ? "active" : ""}`}
             id="searchBar"
           >
-            <div
+            <form
               className={`search-item ${activeItem === "where" ? "active" : ""
                 }`}
               id="where"
@@ -153,12 +155,12 @@ const Header = () => {
                   }
                 }}
               />
-            </div>
+            </form>
             {showSuggestion ? (inputValue !== "" ?
               <div className="show-suggestions">
                 <div className="all-suggestions">{suggestions && suggestions.map((element, index) => (
                   <div key={index} onClick={() => handleSuggestion(element)} className="all-suggestions-text">
-                    {element.address.street}
+                    {element.value}
                   </div>
                 ))}</div>
               </div>
@@ -293,7 +295,7 @@ const Header = () => {
               </div>
             </div>
 
-            <button className="search-button">Search</button>
+            <Link to={`/search?${queryString}`} className="search-button">Search</Link>
           </div>
         ) : (
           <button
@@ -386,32 +388,32 @@ const Header = () => {
               <div className="mobile-nav-where">
                 <label htmlFor="whereInput">Where to ?</label>
                 <input
-                   type="text"
-                   id="whereInput"
-                   placeholder="Search destinations"
-                   aria-label="Search destinations"
-                   value={inputValue}
-                   onChange={handlechange}
-                   autoComplete="off"
-                   onClick={() => {
-                     if (!showSuggestion) {
-                       setShowSuggestion(true);
-                     } 
-                   }}
+                  type="text"
+                  id="whereInput"
+                  placeholder="Search destinations"
+                  aria-label="Search destinations"
+                  value={inputValue}
+                  onChange={handlechange}
+                  autoComplete="off"
+                  onClick={() => {
+                    if (!showSuggestion) {
+                      setShowSuggestion(true);
+                    }
+                  }}
                 />
                 {/* <div cl>Suggestions</div> */}
               </div>
               {showSuggestion ? (inputValue !== "" ?
-              <div className="mobile-show-suggestions">
-                <div className="all-suggestions">{suggestions && suggestions.map((element, index) => (
-                  <div key={index} onClick={() => handleSuggestion(element)} className="all-suggestions-text">
-                    {element.address.street}
-                  </div>
-                ))}</div>
-              </div>
+                <div className="mobile-show-suggestions">
+                  <div className="all-suggestions">{suggestions && suggestions.map((element, index) => (
+                    <div key={index} onClick={() => handleSuggestion(element)} className="all-suggestions-text">
+                      {element.value}
+                    </div>
+                  ))}</div>
+                </div>
 
-              : ""
-            ) : ("")}
+                : ""
+              ) : ("")}
 
               <div
                 className="mobile-date"
@@ -540,9 +542,11 @@ const Header = () => {
 
 
             </div>
-            <div className="mobile-serach">
-              <button className="mobile-search-button">
-                <svg xmlnsXlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false" className="mobile-search-svg" width="32" height="32"><path d="M13 0a13 13 0 0 1 10.5 20.67l7.91 7.92-2.82 2.82-7.92-7.91A12.94 12.94 0 0 1 13 26a13 13 0 1 1 0-26zm0 4a9 9 0 1 0 0 18 9 9 0 0 0 0-18z" fill="#FFFFFF"></path></svg>Search</button>
+            <div className="mobile-serach" onClick={() => {
+              setShowMobile(false);}}>
+              <Link className="mobile-search-button" to={`/search?${queryString}`}>
+                <svg xmlnsXlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false" className="mobile-search-svg" width="32" height="32"><path d="M13 0a13 13 0 0 1 10.5 20.67l7.91 7.92-2.82 2.82-7.92-7.91A12.94 12.94 0 0 1 13 26a13 13 0 1 1 0-26zm0 4a9 9 0 1 0 0 18 9 9 0 0 0 0-18z" fill="#FFFFFF"></path></svg>Search
+                </Link>
             </div>
 
           </div>

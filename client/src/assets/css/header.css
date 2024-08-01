@@ -170,6 +170,7 @@ body {
   border-radius: 50px;
   cursor: pointer;
   transition: background-color 0.3s;
+  text-decoration: none;
 }
 
 .search-button:hover {
@@ -389,6 +390,7 @@ body {
   border-radius: 10px;
   font-size: 20px;
   font-weight: 600;
+  text-decoration: none;
 }
 
 .mobile-serach {

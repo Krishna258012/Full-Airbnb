@@ -4,7 +4,7 @@ import GetUseFetch from "./GetUseFetch";
 
 const Home = ({ apipath }) => {
   const [productData] = GetUseFetch(apipath);
-
+console.log(apipath);
   const fullData = productData?.data;
 
   return (
