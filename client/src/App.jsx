@@ -5,6 +5,7 @@ import HOmepage from './Components/HOmepage';
 import Search from './Components/Search';
 import Login from './Components/Login';
 import Signup from './Components/Signup';
+import {Toaster} from "react-hot-toast"
 
 function App() {
   const location = useLocation();
@@ -14,6 +15,7 @@ function App() {
 
   return (
     <>
+    <Toaster/>
       {shouldShowHeader && <Header />}
       <Routes>
         <Route path="/" element={<HOmepage />} />
