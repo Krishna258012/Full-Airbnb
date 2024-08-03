@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { schema } = require("./listingandreviews");
 
 const Login_Signup = new mongoose.Schema({
   name: {
@@ -15,6 +14,7 @@ const Login_Signup = new mongoose.Schema({
     required: true,
   },
 });
+
 
 const AuthModel = mongoose.model("auth-data", Login_Signup);
 

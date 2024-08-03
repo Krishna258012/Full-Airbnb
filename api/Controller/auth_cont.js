@@ -17,9 +17,7 @@ const register = async (req, res) => {
         return res.status(400).send({
           message: "Email Already Registerd",
         });
-      }
-
-      {
+      } else {
         const Salt = await bcrypt.genSalt(10);
         const hashpass = await bcrypt.hash(password, Salt);
         const newUser = new AuthModel({
@@ -61,7 +59,7 @@ const login = async (req, res) => {
         if (comparepass) {
           const jwtToken = jwt.sign(payload, process.env.SecertKey);
           res.cookie("token", jwtToken, {
-            maxAge: 1 * 60 * 60 * 1000
+            maxAge: 1 * 60 * 60 * 1000,
           });
           return res
             .status(200)

@@ -6,7 +6,6 @@ import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
-import {debounce} from "lodash"
 
 
 const Signup = () => {
@@ -22,7 +21,7 @@ const Signup = () => {
 
     const Domain = import.meta.env.VITE_DOMAIN;
 
-    const onSubmit = debounce((data) => {
+    const onSubmit = (data) => {
         axios.post(`${Domain}api/auth/register`,{
             name:data.name,
             email:data.email,
@@ -42,7 +41,7 @@ const Signup = () => {
             // toast.error(err)
             toast.error(err.response.data.message)
         })
-    },400)
+    }
 
     return (
         <div className="h-screen flex items-center bg-[#ececec]">
