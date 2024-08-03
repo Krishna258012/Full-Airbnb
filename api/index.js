@@ -21,7 +21,7 @@ app.use(
   })
 );
 app.use(cookie());
-
+console.log("testing");
 app.use("/api", require("./Routes/normal_data"));
 app.use("/api/auth", require("./Routes/auth_routes"));
 
