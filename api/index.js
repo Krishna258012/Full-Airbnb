@@ -16,12 +16,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: process.env.DOMAIN,
     credentials: true,
   })
 );
 app.use(cookie());
-console.log("testing");
+console.log(process.env.DOMAIN);
 app.use("/api", require("./Routes/normal_data"));
 app.use("/api/auth", require("./Routes/auth_routes"));
 
