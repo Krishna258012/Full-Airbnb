@@ -18,6 +18,8 @@ const Header = () => {
   const [suggestions, setSuggestions] = useState("");
   const [showSuggestion, setShowSuggestion] = useState(false)
 
+ 
+// const user = "t"
 
   const Domain = import.meta.env.VITE_DOMAIN;
 
@@ -375,8 +377,11 @@ const Header = () => {
                 fill="#6A6A6A"
               ></path>
             </svg>
+            
           </button>
         </div>
+
+        // !!user && (<div>hiii</div>)
 
         {showMobile ? (
           <div className="popup">

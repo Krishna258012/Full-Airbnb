@@ -1,19 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react';
 import "../assets/css/login.css";
-import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
-
+import { Link } from 'react-router-dom';
+import { debounce } from 'lodash';
 
 const Signup = () => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
     const schema = yup.object().shape({
         name: yup.string().required("Name is Required"),
         email: yup.string().email("Invalid email format").required("Email is Required"),
-        password: yup.string().min(6, "Password Must be Minimum 6 character").required("Password is required")
-    })
+        password: yup.string().min(6, "Password Must be Minimum 6 characters").required("Password is required")
+    });
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
@@ -21,27 +23,34 @@ const Signup = () => {
 
     const Domain = import.meta.env.VITE_DOMAIN;
 
-    const onSubmit = (data) => {
-        axios.post(`${Domain}api/auth/register`,{
-            name:data.name,
-            email:data.email,
-            password:data.password
-        }, {
-            withCredentials: true,
-            headers: {
-                'Content-Type': 'application/json', // Set the request body format to JSON
-              }
-          })
-        .then((res) =>{
-            // console.log(res);
-            toast.success(res.data.message);
-        })
-        .catch((err) => {
-            // console.log(err.response.data.message);
-            // toast.error(err)
-            toast.error(err.response.data.message)
-        })
-    }
+    const delaySubmit = debounce(async(data) => {
+        if (isSubmitting) return;
+
+        setIsSubmitting(true);
+        try {
+            const response = await axios.post(`${Domain}api/auth/register`, {
+                name: data.name,
+                email: data.email,
+                password: data.password,
+            }, {
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            toast.success(response.data.message);
+        } catch (err) {
+            toast.error(err.response.data.message || "Registration failed");
+        } finally {
+            setIsSubmitting(false);
+        }
+    },2000)
+
+    const onSubmit = debounce((data) => {
+        if (!isSubmitting) {
+            delaySubmit(data)
+        }
+    },500);
 
     return (
         <div className="h-screen flex items-center bg-[#ececec]">
@@ -105,8 +114,9 @@ const Signup = () => {
                             <button
                                 type="submit"
                                 className="py-2 px-4 bg-[#ff385a]/90 hover:bg-[#ff385a] focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
+                                disabled={isSubmitting}
                             >
-                                Signup
+                                {isSubmitting ? 'Submitting...' : 'Register'}
                             </button>
                         </form>
                         <div className="flex items-center justify-between mt-4">

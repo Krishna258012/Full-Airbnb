@@ -6,6 +6,9 @@ import Search from './Components/Search';
 import Login from './Components/Login';
 import Signup from './Components/Signup';
 import {Toaster} from "react-hot-toast"
+import axios from 'axios';
+
+axios.defaults.baseURL="http://localhost:5000/";
 
 function App() {
   const location = useLocation();

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "../assets/css/login.css";
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup"
 import { useForm } from 'react-hook-form';
@@ -10,6 +10,10 @@ import { debounce } from "lodash"
 
 
 const Login = () => {
+    const [islogged , setIslogged] = useState(false);
+
+
+
     const schema = yup.object().shape({
         email: yup.string().email("Invalid email format").required("Email is Required"),
         password: yup.string().min(6, "Password Must be Minimum 6 character").required("Password is required")
@@ -18,10 +22,9 @@ const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
     });
-    const Domain = import.meta.env.VITE_DOMAIN;
 
     const onSubmit = debounce((data) => {
-        axios.post(`${Domain}api/auth/login`, {
+        axios.post(`api/auth/login`, {
             email: data.email,
             password: data.password
         }, {
@@ -31,13 +34,26 @@ const Login = () => {
               }
           })
             .then((res) => {
-                console.log(res);
-                toast.success(res.data.message);
+                // console.log(res);
+                if (res.data.message === "Login Successfully") {
+                    setIslogged(true)
+                    toast.success(res.data.message);
+                }else{
+                    toast.error(res.data.message);
+                }
+                
             })
             .catch((err) => {
                 toast.error(err.response.data.message)
             })
     }, 400)
+
+
+
+    if (islogged) {
+        return <Navigate to={"/"}/>
+    }
+
 
     return (
         <div className="h-screen flex items-center bg-[#ececec]">
