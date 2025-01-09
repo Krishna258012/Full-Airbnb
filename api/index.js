@@ -22,8 +22,10 @@ app.use(
 );
 app.use(cookie());
 console.log(process.env.DOMAIN);
+
 app.use("/api", require("./Routes/normal_data"));
 app.use("/api/auth", require("./Routes/auth_routes"));
+app.use("/api/data", require("./Routes/proteceted_data"))
 
 app.get("/", (req, res) => {
   res.send("heelo");

@@ -63,9 +63,9 @@ const login = async (req, res) => {
           });
           return res
             .status(200)
-            .send({ message: `${EmailFind.name} login SuccessFully` });
+            .send({ message: `Login Successfully` });
         } else {
-          return res.status(200).send({ message: "Invalid Password" });
+          return res.status(201).send({ message: "Invalid Password" });
         }
       }
     }
