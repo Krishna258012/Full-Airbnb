@@ -8,8 +8,9 @@ import Signup from './Components/Signup';
 import { Toaster } from "react-hot-toast"
 import axios from 'axios';
 import Rooms from './Components/Rooms';
+const Domain = import.meta.env.VITE_DOMAIN;
 
-axios.defaults.baseURL = "http://localhost:5000/";
+axios.defaults.baseURL = Domain;
 
 function App() {
 
